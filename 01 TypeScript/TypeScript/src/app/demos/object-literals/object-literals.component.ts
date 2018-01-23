@@ -97,6 +97,10 @@ export class ObjectLiteralsComponent implements OnInit {
     console.log("result for myNumber & person:", myNumber, person);
 
     myNumber = 500;
+    person.name = "Alexander";
+    passArgs(myNumber,  Object.assign({}, person));
+    console.log("result for myNumber & person using Object.assign():", myNumber, person);
+
     passArgs(myNumber, {...person});
     console.log("result for myNumber & person using spread:", myNumber, person);
   }
