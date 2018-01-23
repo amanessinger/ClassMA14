@@ -1,0 +1,14 @@
+[
+    {"url": "inline", "title": "Inline Component", "component": "InlineComponent"},
+    {"url": "template", "title": "Template Component", "component": "TemplateComponent"},
+    {"url": "expressions", "title": "Expressions & Interpolation", "component": "ExpressionsComponent"},
+    {"url": "directives", "title": "Using Directives", "component": "DirectivesComponent"},    
+    {"url": "binding", "title": "Data Binding", "component": "BindingComponent"},    
+    {"url": "structdirectives", "title": "Structural Directives", "component": "StructDirectivesComponent"},    
+    {"url": "pipes", "title": "Using Pipes", "component": "PipesComponent"},
+    {"url": "international", "title": "Internationalization", "component": "InternationalizationComponent"},
+    {"url": "custompipes", "title": "Custom Pipes (Filter)", "component": "CustomPipesComponent"},   
+    {"url": "customdirectives", "title": "Custom Directives", "component": "CustomDirectivesComponent"},
+    {"url": "nested", "title": "Related / Nested Components", "component": "NestedComponent"},
+    {"url": "projection", "title": "Content Projection", "component": "ViewChildComponent"}
+]
