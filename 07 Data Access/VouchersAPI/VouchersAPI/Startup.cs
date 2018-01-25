@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Linq;
+using JSNLog;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Vouchers
 {
@@ -36,6 +40,16 @@ namespace Vouchers
             services.AddScoped<IVouchersRepository, VouchersRepository>();
             //services.AddSingleton<IVouchersRepository, VouchersRepository>();
 
+
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            //corsBuilder.WithOrigins("http://localhost:56573"); // for a specific url. Don't add a forward slash on the end!
+            corsBuilder.AllowCredentials();
+            
+
+            //https://stackoverflow.com/questions/40043097/cors-in-net-core
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
@@ -52,12 +66,18 @@ namespace Vouchers
             });
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, VouchersDBContext dbcontext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, VouchersDBContext dbcontext)
         {
-            loggerFactory.AddConsole();
+            loggerFactory.AddNLog();
+            env.ConfigureNLog("nlog.config");
+
+            var jsnlogConfiguration = new JsnlogConfiguration();
+            app.UseJSNLog(new LoggingAdapter(loggerFactory), jsnlogConfiguration);
 
             if (env.IsDevelopment())
             {
+                loggerFactory.AddConsole();
+                loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
             }

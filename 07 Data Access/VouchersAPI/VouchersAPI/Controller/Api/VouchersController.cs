@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Vouchers.Api
 {
+    [EnableCors("AllowAll")]
     [Route("api/[controller]")]
     public class VouchersController : Controller
     {
