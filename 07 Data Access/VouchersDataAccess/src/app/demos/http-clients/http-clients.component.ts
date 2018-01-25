@@ -21,7 +21,7 @@ export class HttpClientsComponent implements OnInit {
 
   getVouchers() {
     this.httpClient
-      .get<Voucher[]>("http://localhost:5000/api/vouchers")
+      .get<Voucher[]>("http://voucherservice.integrations.at/api/vouchers")
       .subscribe(data => {
         this.result = data;
       });
@@ -29,7 +29,7 @@ export class HttpClientsComponent implements OnInit {
 
   getVouchersHttp() {
     this.http
-      .get("http://localhost:5000/api/vouchers")
+      .get("http://voucherservice.integrations.at/api/vouchers")
       .map(response => response.json())
       .subscribe(data => {
         this.result = data;
